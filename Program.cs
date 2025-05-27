@@ -12,7 +12,7 @@ namespace proyectoprogra
     {
             public enum Menu
             {
-                Consultar = 1, Depositardinero, Retirardinero, Revisarhistorialdedipositivos, Revisarhistorialderetiros, Salir
+                Consultar = 1, Depositardinero, Retirardinero, Revisarhistorialdedipositivos, Revisarhistorialderetiros,Depositosretiros, Salir
             }
             static double saldo = 0;
             static Dictionary<DateTime, double> historialDepositos = new Dictionary<DateTime, double>();
@@ -35,20 +35,29 @@ namespace proyectoprogra
                                 case Menu.Consultar:
                                     Consultarsaldo();
                                     break;
+
                                 case Menu.Depositardinero:
                                     Depositardinero();
 
                                     Console.WriteLine();
                                     break;
+
                                 case Menu.Retirardinero:
                                     retirar();
                                     break;
+
                                 case Menu.Revisarhistorialdedipositivos:
                                     MostrarHistorialDepositos();
                                     break;
+
                                 case Menu.Revisarhistorialderetiros:
                                     MostrarHistorialRetiros();
                                     break;
+
+                                case Menu.Depositosretiros:
+                                Depositosoretiros();
+                                break;
+
                                 case Menu.Salir:
                                     salir();
                                     break;
@@ -101,7 +110,8 @@ namespace proyectoprogra
                 Console.WriteLine("3) Retirar dinero");
                 Console.WriteLine("4) Revisar historial de depositos");
                 Console.WriteLine("5) Revisar historial de retiros");
-                Console.WriteLine("6) Salir");
+                Console.WriteLine("6) Depositos o retiros");
+                Console.WriteLine("7) Salir");
                 Menu opc = (Menu)Convert.ToInt32(Console.ReadLine());
                 return opc;
             }
@@ -154,7 +164,7 @@ namespace proyectoprogra
 
             static void Depositardinero()
             {
-                Console.WriteLine("Ingresar dinero a retirar");
+                Console.WriteLine("Ingresar dinero a depositar");
                 double dinero = Convert.ToDouble(Console.ReadLine());
                 saldo += dinero;
                 DateTime fecha = DateTime.Now;
@@ -187,7 +197,7 @@ namespace proyectoprogra
 
                 if (historialDepositos.Count == 0)
                 {
-                    Console.WriteLine("No se han realizado depósitos aún.");
+                    Console.WriteLine("No se han realizado depósitos aún");
                 }
                 else
                 {
@@ -213,7 +223,25 @@ namespace proyectoprogra
                     }
                 }
             }
+            static void Depositosoretiros()
+            {
+            Console.WriteLine("¿Que hay más?"); 
+          
+            if (historialDepositos.Count > historialRetiros.Count)
+            {
+                Console.WriteLine($"Hay más depositos");
+                Console.WriteLine($"D : {historialDepositos.Count}");
+                Console.WriteLine($"R : {historialRetiros.Count}");
+            }
 
+            else 
+            {
+                Console.WriteLine($"Hay mas retiros");
+                Console.WriteLine($"D : {historialDepositos.Count}");
+                Console.WriteLine($"R : {historialRetiros.Count}");
+            }
+            }
+        
             static void salir()
             {
                 Console.WriteLine("Hasta pronto");
